@@ -8,14 +8,19 @@ import { JsonFormsModule } from '@jsonforms/angular';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 import { AppComponent } from './app.component';
 import { CustomAutocompleteControlRenderer } from './custom.autocomplete';
+import { GetProps, TableRenderer } from './table.renderer';
 import { DataDisplayComponent } from './data.control';
 import { LangComponent } from './lang.control';
-
+import { MatTableModule } from '@angular/material/table';
+import { CdkTableModule} from '@angular/cdk/table';
+import {DataSource} from '@angular/cdk/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomAutocompleteControlRenderer,
+    TableRenderer,
+    GetProps,
     LangComponent,
     DataDisplayComponent
   ],
@@ -26,7 +31,8 @@ import { LangComponent } from './lang.control';
     JsonFormsAngularMaterialModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   schemas: [],
   bootstrap: [AppComponent]

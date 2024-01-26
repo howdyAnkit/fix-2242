@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
-import { and, createAjv, isControl, optionIs, rankWith, schemaTypeIs, scopeEndsWith, Tester } from '@jsonforms/core';
+import { and, createAjv, isArrayObjectControl, isControl, isObjectArrayControl, isPrimitiveArrayControl, optionIs, or, RankedTester, rankWith, schemaTypeIs, scopeEndsWith, Tester } from '@jsonforms/core';
 import { CustomAutocompleteControlRenderer } from './custom.autocomplete';
+import { TableRenderer } from './table.renderer';
 import { DataDisplayComponent } from './data.control';
 import { LangComponent } from './lang.control';
 import uischemaAsset from '../assets/uischema.json';
@@ -15,6 +16,11 @@ const departmentTester: Tester = and(
   scopeEndsWith('department')
 );
 
+const TableRendererTester: RankedTester = rankWith(
+  7,
+  or(isArrayObjectControl)
+);
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,6 +29,7 @@ const departmentTester: Tester = and(
 export class AppComponent {
   renderers = [
     ...angularMaterialRenderers,
+    { tester: TableRendererTester, renderer: TableRenderer },
     { tester: rankWith(5, departmentTester), renderer: CustomAutocompleteControlRenderer },
     {
       renderer: DataDisplayComponent,
